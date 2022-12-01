@@ -15,7 +15,7 @@ export class AuthService {
 
     //Credenciais é a Interface
   public authenticate(credenciais: Credenciais): Observable <Token> { // capturar credenciais, requisitar token de autorização e autenticar
-    return this.http.post<Token>(`${API_CONFIG.baseUrl}/auth/login`, credenciais).pipe (//endpoint, uma requisição que retorna um token
+    return this.http.post<Token>(`${API_CONFIG.baseUrl}/auth/login`, credenciais).pipe (//endpoint, uma requisição que retorna um token/ Requisição http(httpClient) faz comunicação com o back
     // Autenticar, o token diz se esta ou não logado, expirado ou não. Guardar localmente no navegador, para usar futuramente
       tap(token => {  //tap executa uma função antes de ser executada 
         localStorage.setItem("token", token.accessToken); //armazenamento local no navegador(localstorage)
