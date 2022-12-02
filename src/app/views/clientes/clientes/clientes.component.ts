@@ -1,3 +1,4 @@
+import { ClienteService } from './../../../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from 'src/app/models/cliente';
 
@@ -12,9 +13,16 @@ export class ClientesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'telefone', 'editar', 'excluir']; //colunas na tabela
   dataSource: Cliente[] = []; //data sourse(array de dados) dados que serão renderizados na tabela, passa o array, e pega o obj que foi passado e renderiza em cada linha na tabela
 
-  constructor() { }
+  constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
+    this.initializeTable();
+  }
+
+  private initializeTable(): void {
+    this.clienteService.findAll().subscribe(clientes => {
+      this.dataSource = clientes;
+    });
   }
 
 }
