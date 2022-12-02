@@ -4,12 +4,15 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, EMPTY, tap } from 'rxjs';//observable, tap
 import { Token } from '../models/token';
 import { API_CONFIG } from '../config/api.config';
+import { IfStmt } from '@angular/compiler';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' //quem manda no services é o app.module
 })
 export class AuthService {
 
+  private jwt: JwtHelperService = new JwtHelperService; // variavel privada
   constructor(private http: HttpClient) { }
 
 
@@ -26,10 +29,17 @@ export class AuthService {
         return EMPTY;
       })
     )
-
-
-        
-
-
   }
+
+  public isAuthenticate(): boolean {
+    let flag: boolean = false;
+    const token = localStorage.getItem("token");
+    if(token) {
+      //verificar se o token está expirado
+      flag = !this.jwt.isTokenExpired(token); //verifica se ele não está expirado
+    }
+    return flag
+  }
+
+  
 }
