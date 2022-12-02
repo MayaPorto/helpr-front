@@ -13,7 +13,8 @@ const routes: Routes = [ //modulo com todas as rotas filhas de login
 loadChildren: () =>
  import('./views/home/home.module').then(m => m.HomeModule),
  canActivate: [AuthGuard]
- }];
+ },
+  { path: 'clientes', loadChildren: () => import('./views/clientes/clientes.module').then(m => m.ClientesModule) }];
 //antes era aqui que se fazia a rota
 
 
