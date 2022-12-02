@@ -32,7 +32,7 @@ public formLogin: FormGroup;
       //processo de autenticar
       const credenciais: Credenciais = this.formLogin.value;
       this.authService.authenticate(credenciais).subscribe(response =>{
-        alert("Bem-vinso(a)");
+        alert("Bem-vindo(a)!");
         this.router.navigate(["/Home"])
       });
     } else{
